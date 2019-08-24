@@ -1,25 +1,41 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+
+import axios from 'axios';
+
+import Header from "./components/Header";
+import Genres from './components/Genres';
+import NewGenre from './components/NewGenre';
+import EditGenre from './components/EditGenre';
+
+const Home = () => {
+  return <h1>Home</h1>;
+};
+
+const Series = () => {
+  return <h1>Séries</h1>
+}
 
 function App() {
+  const [data, setData] = useState({})
+  useEffect(() => {
+    axios.get('/api').then(res => {
+      setData(res.data)
+    })
+  }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div>
+        <Header />
+        <Route path="/" exact component={Home} />
+        <Route path="/genres" exact component={Genres} />
+        <Route path="/genres/new" exact component={NewGenre} />
+        <Route path="/genres/:id" exact component={EditGenre} />
+        <Route path="/series" component={Series} />
+        <pre>{JSON.stringify(data)}</pre>
+      </div>
+    </Router>
   );
 }
 
