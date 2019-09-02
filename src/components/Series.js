@@ -10,7 +10,7 @@ const Series = () => {
     });
   }, []);
 
-  const deleteSeries = id => {
+  const deleteSerie = id => {
     axios.delete(`/api/series/${id}`).then(res => {
       const filterGenres = data.filter(item => item.id !== id);
       setData(filterGenres);
@@ -24,7 +24,7 @@ const Series = () => {
         <td>{record.name}</td>
         <td>
           <button
-            onClick={() => deleteSeries(record.id)}
+            onClick={() => deleteSerie(record.id)}
             className="btn btn-danger"
           >
             Remover

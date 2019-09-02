@@ -43,16 +43,14 @@ const InfoSerie = ({ match }) => {
 
   const save = () => {
     axios
-      .put(`/api/series/${match.params.id}`, {
-        form
-      })
+      .put(`/api/series/${match.params.id}`, form)
       .then(res => {
         setSuccess(true);
       });
   };
 
   if (success) {
-    // return <Redirect to="/series" />;
+    return <Redirect to="/series" />;
   }
 
   return (
@@ -88,7 +86,7 @@ const InfoSerie = ({ match }) => {
       <div>
         <button
           onClick={() => setMode("EDIT")}
-          className="btn btn-primary mt-2"
+          className="btn btn-primary mt-2 ml-2"
         >
           Editar
         </button>
@@ -115,16 +113,20 @@ const InfoSerie = ({ match }) => {
                 type="text"
                 className="form-control"
                 id="comments"
-                placeholder="Nome da Série"
+                placeholder="Comentário sobre a série"
                 value={form.comments}
                 onChange={onChange("comments")}
               />
             </div>
-            <div class="form-group">
+            <div className="form-group">
               <label for="exampleFormControlSelect1">Gênero</label>
-              <select className="form-control" onChange={onChange('genre_id')}>
+              <select className="form-control" onChange={onChange("genre_id")}>
                 {genres.map(genre => (
-                  <option key={genre.id} value={genre.id} select={genre.id === form.id}>
+                  <option
+                    key={genre.id}
+                    value={genre.id}
+                    select={genre.id === form.genre}
+                  >
                     {genre.name}
                   </option>
                 ))}
