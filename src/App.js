@@ -10,7 +10,12 @@ import NewSerie from "./components/NewSerie";
 import InfoSerie from "./components/InfoSerie";
 
 const Home = () => {
-  return <h1>Home</h1>;
+  return (
+    <div className="container">
+      <h1 className="display-4">Minhas Séries</h1>
+      <h2>Gerencie suas séries de uma forma simples e rápida :)</h2>
+    </div>
+  );
 };
 
 function App() {
